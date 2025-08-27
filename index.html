@@ -1,0 +1,111 @@
+<!-- Cargar la fuente Inter y Tailwind CSS -->
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!--
+  Configuración de Tailwind CSS para usar la fuente Inter
+-->
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- Contenedor principal con un fondo degradado vibrante -->
+<div class="font-sans min-h-screen py-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center bg-gradient-to-br from-pink-200 via-yellow-100 to-purple-200">
+  <!-- Título principal con un degradado de texto moderno -->
+  <header class="text-center mb-10">
+    <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-500">
+      Brand Board
+    </h1>
+    <!-- Subtítulo con un color de texto más oscuro para mayor legibilidad -->
+    <p class="max-w-3xl mx-auto text-lg sm:text-xl text-gray-800">
+      En el marco de este ejercicio, llamaremos <strong>brand board</strong> a la representación
+      gráfica y visual de los elementos que conforman la identidad de una marca
+      (marca personal, marca comercial). Esto nos permite tanto identificar como
+      diferenciar a la marca de otras en el mercado.
+    </p>
+  </header>
+
+  <!-- Contenedor principal para las tarjetas, con un diseño de cuadrícula -->
+  <main class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl">
+
+    <!-- Primera tarjeta: "Mi Brand Board" -->
+    <!-- Agregado un efecto de transición y escala al pasar el cursor -->
+    <div class="bg-white p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100 transform transition-transform duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-pink-300/50">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-center">
+        Mi Brand Board
+      </h2>
+      <!-- Contenedor para la imagen -->
+      <div class="w-full h-80 rounded-2xl flex items-center justify-center overflow-hidden cursor-pointer" onclick="openModal('https://i.pinimg.com/736x/53/8d/b8/538db8d9c9761fe7ed36b838926e666a.jpg')">
+        <!-- Imagen de tu Brand Board -->
+        <img src="https://i.pinimg.com/736x/53/8d/b8/538db8d9c9761fe7ed36b838926e666a.jpg" alt="Mi Brand Board" class="w-full h-full object-cover rounded-2xl">
+      </div>
+    </div>
+
+    <!-- Segunda tarjeta: "El Brand Board de [Nombre de la Marca]" -->
+    <!-- Agregado el mismo efecto de transición al pasar el cursor -->
+    <div class="bg-white p-6 sm:p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100 transform transition-transform duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-purple-300/50">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-center">
+        El Brand Board de Adidas
+      </h2>
+      <!-- Contenedor para la imagen -->
+      <div class="w-full h-80 rounded-2xl flex items-center justify-center overflow-hidden cursor-pointer" onclick="openModal('https://i.pinimg.com/736x/1e/64/be/1e64be852cd8c2c8637f5e5469ce68dd.jpg')">
+        <!-- Imagen de la marca Adidas -->
+        <img src="https://i.pinimg.com/736x/1e/64/be/1e64be852cd8c2c8637f5e5469ce68dd.jpg" alt="Brand board de Adidas" class="w-full h-full object-cover rounded-2xl">
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Modal para la imagen ampliada -->
+<div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-75 p-4" onclick="closeModal()">
+  <span class="absolute top-4 right-6 text-white text-5xl font-bold cursor-pointer hover:text-gray-300" onclick="closeModal()">
+    &times;
+  </span>
+  <div class="relative max-w-5xl max-h-5xl w-full">
+    <img id="modalImage" class="rounded-lg shadow-lg max-w-full max-h-[80vh] mx-auto" alt="Zoomed image">
+  </div>
+</div>
+
+<script>
+  // Get the modal and the image inside it
+  const modal = document.getElementById('imageModal');
+  const modalImage = document.getElementById('modalImage');
+
+  /**
+   * Opens the modal with the specified image.
+   * @param {string} src - The URL of the image to display.
+   */
+  function openModal(src) {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    modalImage.src = src;
+  }
+
+  /**
+   * Closes the modal.
+   * @param {Event} event - The event object.
+   */
+  function closeModal(event) {
+    // Prevent the event from bubbling up and closing the modal immediately
+    // when clicking on the image inside the modal.
+    if (event) {
+      event.stopPropagation();
+    }
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+  }
+
+  // Add event listener to the modal image to prevent closing when clicked
+  modalImage.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+</script>
